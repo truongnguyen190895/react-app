@@ -1,11 +1,9 @@
-// import logo from './logo.svg';
-import './App.css';
+import React from 'react';
 
 function App() {
   return (
     <div className="App">
-      <h1>Hello World</h1>
-      <p>This is my first time to GitHub</p>
+      <h1>Hello Truong Nguyen</h1>
     </div>
   );
 }
