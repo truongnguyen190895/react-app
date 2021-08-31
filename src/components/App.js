@@ -8,6 +8,7 @@ import PrivateRoute from './PrivateRoute'
 import Session from './Session'
 import Vote from './Vote'
 import Result from './Result'
+import MapBox from './MapBox'
 import {
   BrowserRouter as Router,
   Switch,
@@ -35,7 +36,6 @@ function App() {
         </Router>
       </div>
     </Container>
-
   );
 }
 

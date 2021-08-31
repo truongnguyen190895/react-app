@@ -1,12 +1,15 @@
-import React, { useState } from 'react'
 import { Form, Button } from 'react-bootstrap';
-import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
+import "mapbox-gl/dist/mapbox-gl.css";
+import "react-map-gl-geocoder/dist/mapbox-gl-geocoder.css";
+import React, { useState, useRef, useCallback } from "react";
+import MapGL from "react-map-gl";
+import Geocoder from "react-map-gl-geocoder";
 import {
     BrowserRouter as Router,
-    Switch,
-    Route,
-    Link, useHistory,
+    useHistory,
 } from "react-router-dom";
+
+const MAPBOX_TOKEN = 'pk.eyJ1IjoidHJ1b25nbmd1eWVuMTkwODk1IiwiYSI6ImNrc3I3NDd6ZjBqcHoyeG4xampzc3N2ZW0ifQ.zS68aQ32Ktla3IVsWii5Pw'
 
 export default function Session() {
     const history = useHistory();
@@ -22,8 +25,29 @@ export default function Session() {
         e.preventDefault();
         history.push('/')
     }
+    const [viewport, setViewport] = useState({
+        latitude: 21.02738276864411,
+        longitude: 105.83318632938982,
+        zoom: 14,
+        bearing: 0,
+        pitch: 0
+    });
+    const mapRef = useRef();
+    const handleViewportChange = useCallback(
+        (newViewport) => setViewport(newViewport),
+        []
+    );
+    const handleGeocoderViewportChange = useCallback(
+        (newViewport) => {
+            const geocoderDefaultOverrides = { transitionDuration: 1000 };
 
-
+            return handleViewportChange({
+                ...newViewport,
+                ...geocoderDefaultOverrides
+            });
+        },
+        [handleViewportChange]
+    );
 
     return (
         <div className='create-session'>
@@ -37,7 +61,9 @@ export default function Session() {
                 <Form.Group controlId="formBasicPassword">
                     <Form.Label>Your current location</Form.Label> <br />
                     <Button style={{ marginBottom: '40px' }}>Chose from map</Button>
-                    <Form.Control type="text" placeholder="Location" />
+
+
+                    <Form.Control style={{ marginTop: '30px' }} type="text" placeholder="Location" />
                 </Form.Group>
                 <Button variant="primary" onClick={handleBack} style={{ margin: '50px 20px 0 0' }}>
                     Back
@@ -46,18 +72,23 @@ export default function Session() {
                     Next
                 </Button>
             </Form>
+            <MapGL
+                ref={mapRef}
+                {...viewport}
+                width="50vw"
+                height="50vh"
+                onViewportChange={handleViewportChange}
+                mapboxApiAccessToken={MAPBOX_TOKEN}
+            >
 
-            <MapContainer style={{ width: '100%', height: '500px' }} center={[21.028656997083786, 105.8355587771331]} zoom={13} scrollWheelZoom={false}>
-                <TileLayer
-                    attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-                    url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                <Geocoder
+                    mapRef={mapRef}
+                    onViewportChange={handleGeocoderViewportChange}
+                    mapboxApiAccessToken={MAPBOX_TOKEN}
+                    position="top-left"
                 />
-                <Marker position={[51.505, -0.09]}>
-                    <Popup>
-                        A pretty CSS3 popup. <br /> Easily customizable.
-                    </Popup>
-                </Marker>
-            </MapContainer>
+            </MapGL>
+
         </div>
     )
 }
