@@ -8,13 +8,14 @@ import PrivateRoute from './PrivateRoute'
 import Session from './Session'
 import Vote from './Vote'
 import Result from './Result'
-import MapBox from './MapBox'
+
 import {
   BrowserRouter as Router,
   Switch,
   Route,
   Link
 } from "react-router-dom";
+
 
 function App() {
   return (

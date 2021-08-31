@@ -2,11 +2,11 @@ import React, { useState } from 'react'
 import { Form, Button } from 'react-bootstrap'
 import { useHistory } from 'react-router-dom'
 
-export default function Vote() {
-
+export default function Vote(props) {
+    let places = '';
     const history = useHistory();
     const [place, setPlace] = useState([]);
-    const [time, setTime] = useState(1);
+
     function handleClick(e) {
         e.preventDefault();
         history.push('/session/create/3')
@@ -17,15 +17,25 @@ export default function Vote() {
         history.push('/session/create/1')
     }
 
-    function handleChange(e) {
+    function handleInput(e) {
         e.preventDefault();
-        const timeValue = e.target.value;
-        setTime(parseInt(timeValue));
+        places = e.target.value;
     }
+
+    function handleSelectPlace(e) {
+        e.preventDefault();
+        setPlace((prev) => {
+            return [...prev, places]
+        })
+
+    }
+
+
 
 
     return (
         <div>
+
             <h1 style={{ textAlign: 'center', margin: '40px 0' }}>Time to VOTE!!!</h1>
             <Form>
                 <Form.Group controlId="formBasicEmail">
@@ -38,7 +48,7 @@ export default function Vote() {
                 </Form.Group>
                 <Form.Group controlId="formBasicPassword">
                     <Form.Label>Time limitation for voting in minute</Form.Label> <br />
-                    <select onChange={handleChange} style={{ width: '100%', height: '40px' }}>
+                    <select style={{ width: '100%', height: '40px' }}>
                         <option value={1}>1 minute</option>
                         <option value={5}>5 minutes</option>
                         <option value={10}>10 minutes</option>
@@ -47,11 +57,12 @@ export default function Vote() {
                 </Form.Group>
                 <Form.Group controlId="formBasicPassword">
                     <Form.Label>List of places</Form.Label>
-                    <Button>Chose from map</Button>
+                    <Form.Control type="text" placeholder="Places" onChange={handleInput} />
+                    <Button onClick={handleSelectPlace} value={place}>Chose</Button>
                     <ul>
-                        <li>Hanoi</li>
-                        <li>Hai Phong</li>
-                        <li>Da Nang</li>
+                        {place.map((item, ind) => {
+                            return <li key={ind}>{item}</li>
+                        })}
                     </ul>
                 </Form.Group>
 
