@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Button, Form } from "react-bootstrap";
 import { useHistory } from "react-router-dom";
 import { db } from "../firebase.js";
-const { v4: uuidv4 } = require("uuid");
+import { v4 as uuidv4 } from "uuid";
 uuidv4();
 
 export default function Result() {
@@ -24,11 +24,22 @@ export default function Result() {
 
   return (
     <div>
+      <div>
+        <span
+          style={{
+            color: "#3b82f6",
+            fontSize: "20px",
+            fontWeight: "bold",
+            marginTop: "35px",
+            textAlign: "center",
+          }}
+        >
+          https://cungdichoi.com/sessions/{uuidv4()}
+        </span>
+        <Button style={{ marginLeft: "15px" }}>Copy</Button>
+      </div>
       {loadTitle.map((val) => (
         <>
-          {/* <div>
-            <p>https://cungdichoi.com/sessions/{uuidv4}</p>
-          </div> */}
           <Form.Check type="radio" aria-label="radio 1" />
           <span>
             {val.title}
@@ -38,6 +49,8 @@ export default function Result() {
           <span>{val.content}</span>
         </>
       ))}
+
+      <Button>create a new group</Button>
     </div>
   );
 }
