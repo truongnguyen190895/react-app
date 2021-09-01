@@ -9,8 +9,8 @@ const ResultList = (props) => {
       {props.movies.map((movie) => (
         <Item
           key={movie.id}
+          name={movie.name}
           title={movie.title}
-          releaseDate={movie.releaseDate}
           openingText={movie.openingText}
         />
       ))}

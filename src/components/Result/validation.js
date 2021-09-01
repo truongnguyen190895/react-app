@@ -2,10 +2,10 @@ const validation = (values) => {
   let error = {};
 
   if (!values.titleRef) {
-    error.titleRef = "Name is required";
+    error.titleRef = "Vui Lòng Nhập Tên";
   }
   if (!values.openingTextRef) {
-    error.openingTextRef = "Name is required";
+    error.openingTextRef = "Vui Lòng Nhập Tên";
   }
   return error;
 };

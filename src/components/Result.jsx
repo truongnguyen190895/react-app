@@ -3,9 +3,8 @@ import React, { useState, useEffect, useCallback } from "react";
 import ResultList from "./Result/ResultList";
 import Add from "./Result/Add";
 import "./Result.css";
-import db from "../firebase.js";
 
-function App() {
+function Vote() {
   const [movies, setMovies] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
@@ -15,7 +14,7 @@ function App() {
     setError(null);
     try {
       const response = await fetch(
-        "https://chat-app-e7f44-default-rtdb.asia-southeast1.firebasedatabase.app/content.json"
+        "https://appvoting-c487c-default-rtdb.asia-southeast1.firebasedatabase.app/movie.json"
       );
       if (!response.ok) {
         throw new Error("Something went wrong!");
@@ -23,18 +22,19 @@ function App() {
 
       const data = await response.json();
 
-      const loadedResult = [];
+      const loadedMovies = [];
 
       for (const key in data) {
-        loadedResult.push({
+        loadedMovies.push({
           id: key,
+          name: data[key].name,
           title: data[key].title,
           openingText: data[key].openingText,
-          releaseDate: data[key].releaseDate,
+          // releaseDate: data[key].releaseDate,
         });
       }
 
-      setMovies(loadedResult);
+      setMovies(loadedMovies);
     } catch (error) {
       setError(error.message);
     }
@@ -47,7 +47,7 @@ function App() {
 
   async function addMovieHandler(movie) {
     const response = await fetch(
-      "https://chat-app-e7f44-default-rtdb.asia-southeast1.firebasedatabase.app/content.json",
+      "https://appvoting-c487c-default-rtdb.asia-southeast1.firebasedatabase.app/movie.json",
       {
         method: "POST",
         body: JSON.stringify(movie),
@@ -80,11 +80,11 @@ function App() {
         <Add onAddMovie={addMovieHandler} />
       </section>
       <section>
-        <button onClick={fetchMoviesHandler}>Show result</button>
+        <button onClick={fetchMoviesHandler}>Fetch Movies</button>
       </section>
       <section>{content}</section>
     </React.Fragment>
   );
 }
 
-export default App;
+export default Vote;

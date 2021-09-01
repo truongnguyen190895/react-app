@@ -16,7 +16,8 @@ export default function Session(props) {
 
   function handleClick(e) {
     e.preventDefault();
-    history.push("/session/create/2");
+    // history.push("/session/create/2");
+    history.push("/session/create/3");
   }
 
   function handleBack(e) {
