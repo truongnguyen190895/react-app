@@ -32,6 +32,9 @@ function AddMovie(props) {
 
     props.onAddMovie(movie);
   }
+  function handleClick() {
+    history.push("/");
+  }
 
   return (
     <form onSubmit={submitHandler}>
@@ -52,6 +55,7 @@ function AddMovie(props) {
       </button>
       <button>Add Content</button>
       <ToastContainer />
+      <button onClick={handleClick}>Home Page</button>
     </form>
   );
 }
