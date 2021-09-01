@@ -5,7 +5,7 @@ import Add from "./Result/Add";
 import "./Result.css";
 
 function Vote() {
-  const [movies, setMovies] = useState([]);
+  const [lists, setLists] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
 
@@ -34,7 +34,7 @@ function Vote() {
         });
       }
 
-      setMovies(loadedMovies);
+      setLists(loadedMovies);
     } catch (error) {
       setError(error.message);
     }
@@ -62,8 +62,8 @@ function Vote() {
 
   let content = <p>Found no movies.</p>;
 
-  if (movies.length > 0) {
-    content = <ResultList movies={movies} />;
+  if (lists.length > 0) {
+    content = <ResultList lists={lists} />;
   }
 
   if (error) {
@@ -80,7 +80,7 @@ function Vote() {
         <Add onAddMovie={addMovieHandler} />
       </section>
       <section>
-        <button onClick={fetchMoviesHandler}>Fetch Movies</button>
+        <button onClick={fetchMoviesHandler}>Show Content</button>
       </section>
       <section>{content}</section>
     </React.Fragment>

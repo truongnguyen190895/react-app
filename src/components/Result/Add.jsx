@@ -3,12 +3,20 @@ import React, { useRef } from "react";
 import classes from "./Add.module.css";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { useHistory } from "react-router-dom";
+import { Button } from "react-bootstrap";
 
 function AddMovie(props) {
   const nameRef = useRef("");
   const titleRef = useRef("");
   const openingTextRef = useRef("");
+  const history = useHistory();
   // const releaseDateRef = useRef("");
+
+  function handleBack(e) {
+    e.preventDefault();
+    history.push("/session/create/1");
+  }
 
   function submitHandler(event) {
     event.preventDefault();
@@ -39,7 +47,10 @@ function AddMovie(props) {
         <label htmlFor="opening-text">Opening Text</label>
         <textarea rows="5" id="opening-text" ref={openingTextRef}></textarea>
       </div>
-      <button>Add Movie</button>
+      <button onClick={handleBack} style={{ margin: "10px" }}>
+        Back
+      </button>
+      <button>Add Content</button>
       <ToastContainer />
     </form>
   );
