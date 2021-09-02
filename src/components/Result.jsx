@@ -5,11 +5,24 @@ import Add from "./Result/Add";
 import "./Result.css";
 import db from "../firebase.js";
 import { Button } from "bootstrap";
+import { useHistory } from "react-router-dom";
 
 function App() {
   const [movies, setMovies] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
+
+  const history = useHistory();
+
+  function handleClick(e) {
+    e.preventDefault();
+    history.push("/session/create/4");
+  }
+
+  function handleBack(e) {
+    e.preventDefault();
+    history.push("/session/create/2");
+  }
 
   const fetchMoviesHandler = useCallback(async () => {
     setIsLoading(true);
@@ -81,7 +94,17 @@ function App() {
         <Add onAddMovie={addMovieHandler} />
       </section>
       <section>
-        <button onClick={fetchMoviesHandler}>Show result</button>
+        <button className="btn btn-primary" onClick={fetchMoviesHandler}>
+          Show result
+        </button>
+      </section>
+      <section>
+        <button className="btn btn-primary" onClick={handleBack}>
+          Back
+        </button>
+        <button className="btn btn-primary" onClick={handleClick}>
+          Next
+        </button>
       </section>
       <section>{content}</section>
     </React.Fragment>

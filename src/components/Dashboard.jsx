@@ -2,6 +2,10 @@ import React, { useState } from "react";
 import { Card, Button, Form } from "react-bootstrap";
 import { useAuth } from "../contexts/AuthContext";
 import { useHistory } from "react-router-dom";
+import { Link } from "react-router-dom";
+import { FaSearch } from "react-icons/fa";
+const { v4: uuidv4 } = require("uuid");
+uuidv4();
 
 export default function Dashboard() {
   const { currentUser, logout } = useAuth();
@@ -23,15 +27,15 @@ export default function Dashboard() {
 
   const testData = [
     {
-      id: 1,
+      id: uuidv4(),
       title: "Gogi",
     },
     {
-      id: 2,
+      id: uuidv4(),
       title: "Phan",
     },
     {
-      id: 3,
+      id: uuidv4(),
       title: "WangWang",
     },
   ];
@@ -52,7 +56,14 @@ export default function Dashboard() {
             <tr style={boderdStyle}>
               <td style={boderdStyle}>{item.id}</td>
               <td style={boderdStyle}>{item.title}</td>
-              <td style={{ cursor: "pointer" }}>Detail</td>
+              <td style={{ cursor: "pointer" }}>
+                <Link
+                  to="/session/create/3"
+                  style={{ color: "black", textDecoration: "none" }}
+                >
+                  <FaSearch />
+                </Link>
+              </td>
             </tr>
           );
         })}

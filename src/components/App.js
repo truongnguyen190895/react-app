@@ -7,29 +7,31 @@ import Login from "./Login";
 import PrivateRoute from "./PrivateRoute";
 import Session from "./Session";
 import Vote from "./Vote";
-import Result from "./Result";
-import SessionDetail from "./SessionDetail";
+// import Result from "./Result";
 
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import SessionDetail from "./SessionDetail";
+import ForgotPassword from "./ForgotPassword";
 
 function App() {
   return (
     <Container
       className="d-flex
-    justify-content-center"
+        justify - content - center "
       style={{ height: "100vh" }}
     >
-      <div className="w-100" style={{ maxWidth: "800px" }}>
+      <div className="w-100" style={{ maxWidth: "90%" }}>
         <Router>
           <AuthProvider>
             <Switch>
               <PrivateRoute exact path="/" component={Dashboard} />
               <Route path="/signup" component={Signup} />
               <Route path="/login" component={Login} />
+              <Route path="/forgot-password" component={ForgotPassword} />
               <Route exact path="/session/create/1" component={Session} />
               <Route exact path="/session/create/2" component={Vote} />
-              <Route exact path="/session/create/3" component={Result} />
-              <Route exact path="/session/create/4" component={SessionDetail} />
+              {/* <Route exact path="/session/create/3" component={Result} /> */}
+              <Route exact path="/session/create/3" component={SessionDetail} />
             </Switch>
           </AuthProvider>
         </Router>
