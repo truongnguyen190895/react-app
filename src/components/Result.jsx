@@ -4,6 +4,7 @@ import ResultList from "./Result/ResultList";
 import Add from "./Result/Add";
 import "./Result.css";
 import db from "../firebase.js";
+import { Button } from "bootstrap";
 
 function App() {
   const [movies, setMovies] = useState([]);
@@ -15,7 +16,7 @@ function App() {
     setError(null);
     try {
       const response = await fetch(
-        "https://chat-app-e7f44-default-rtdb.asia-southeast1.firebasedatabase.app/content.json"
+        "https://chat-app-e7f44-default-rtdb.asia-southeast1.firebasedatabase.app/content.json",
       );
       if (!response.ok) {
         throw new Error("Something went wrong!");
@@ -54,7 +55,7 @@ function App() {
         headers: {
           "Content-Type": "application/json",
         },
-      }
+      },
     );
     const data = await response.json();
     console.log(data);
