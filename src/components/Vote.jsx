@@ -59,11 +59,6 @@ export default function Vote(props) {
                     <Form.Label>List of places</Form.Label>
                     <Form.Control type="text" placeholder="Places" onChange={handleInput} />
                     <Button onClick={handleSelectPlace} value={place}>Chose</Button>
-                    <ul>
-                        {place.map((item, ind) => {
-                            return <li key={ind}>{item}</li>
-                        })}
-                    </ul>
                 </Form.Group>
 
 

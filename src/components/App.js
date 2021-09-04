@@ -8,6 +8,8 @@ import PrivateRoute from './PrivateRoute'
 import Session from './Session'
 import Vote from './Vote'
 import Result from './Result'
+import SessionDetail from './SessionDetail';
+import { SessionList } from '../utility/SessionList'
 
 import {
   BrowserRouter as Router,
@@ -32,6 +34,12 @@ function App() {
               <Route exact path='/session/create/1' component={Session} />
               <Route exact path='/session/create/2' component={Vote} />
               <Route exact path='/session/create/3' component={Result} />
+              <Route
+                path='/sessions/detail/:id'
+                render={(props) => (
+                  <SessionDetail {...props} session={SessionList} />
+                )}
+              />
             </Switch>
           </AuthProvider>
         </Router>

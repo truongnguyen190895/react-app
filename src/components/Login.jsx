@@ -32,9 +32,10 @@ export default function Login() {
 
 
 
-    return (<div className='login'>
-        <h1 style={{ textAlign: 'center' }}>Sign in to invite your friends to hang out together</h1>
-        <Card className>
+    return (<div className='login-container' >
+        <h1 style={{ textAlign: 'center' }}>Go Out Together</h1>
+        <h2>Sign in and vote where to go with your friends</h2>
+        <Card className='login'>
             <Card.Body>
                 <h2 className="text-center mb-4">Log In</h2>
                 {error && <Alert variant='danger'>{error}</Alert>}
@@ -50,10 +51,10 @@ export default function Login() {
                     <Button type="submit" className="w-100" disabled={loading}>Log In</Button>
                 </Form>
             </Card.Body>
+            <div className="w-100 text-center mt-2">
+                Don't have an account? <Link to='/signup'>Sign Up</Link>
+            </div>
         </Card>
-        <div className="w-100 text-center mt-2">
-            Don't have an account? <Link to='/signup'>Sign Up</Link>
-        </div>
     </div>
     )
 }
